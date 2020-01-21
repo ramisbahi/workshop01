@@ -82,6 +82,8 @@ What logarithm did you just take? Was it the natural log, base 10, base 2?
 **Type `?log` in the console.** A question mark that precedes a function's
 name or built in data object will populate the help tab.
 
+Natural log.
+
 **Type the following in the Console window.**
 
 11. `?sd`
@@ -131,16 +133,24 @@ given below.
 
 ```{r echo=FALSE}
 longley
+dim(longley)
 ```
 
 **Answer the following questions about the `longley` data set.**
 
 1. How many rows and columns does `longley` have?
+
+16, 7
+
 2. What do you think is the difference between the first column of years and 
    the column with the label Year?
+   
+One has a column label, the other doesn't.
 
 **Type `head(longley)` in the Console window. What does this do?** 
+First few rows printed 
 **How about `tail(longley)`?**
+Last few rows printed
 
 ## Summary statistics
 
@@ -168,6 +178,12 @@ give the GNP and Year vectors of data, respectively.
 4. Population
 5. Employed
 
+```{r vectors}
+longley$Unemployed
+longley$Population
+longley$Employed
+```
+
 **In another code chunk compute the mean, median, and standard deviation for**
 **each of the vectors in 3 - 5.**
 
@@ -180,6 +196,12 @@ gives us the minimum, maximum, mean, and quartiles of the GNP vector of data.
 
 **Insert a code chunk and use the `summary` function on two variables of**
 **your choice in `longley`.**
+
+```{r summaries}
+summary(longley$Unemployed)
+summary(longley$Population)
+summary(longley$Employed)
+```
 
 
 Now is good place to save your work. Stage, commit, and push your work to 
@@ -210,16 +232,22 @@ in the data are changing as we progress from 1947 - 1962? Discuss this with
 those near you. How would you create a more meaningful representation of 
 employment over time?
 
-```{r}
+Population is also changing, so let's graph as % employed.
 
+```{r fig.width=9, fig.height=6}
+ggplot(data = longley, mapping = aes(x = Year, y = Employed/Population)) +
+  geom_point()
 ```
 
 **Based on your discussions, which economist do you think is correct?**
 
+The second economist; % employed is at its lowest.
+
 Use package `ggplot2` to recreate the plots below.
 
-```{r}
-
+```{r first-plot}
+ggplot(data = longley, mapping = aes(x = Year, y = Employed)) +
+  geom_point(size = 3) + geom_line(color = "purple") + theme_bw()
 ```
 
 *Hints:*
@@ -230,8 +258,9 @@ Use package `ggplot2` to recreate the plots below.
 
 <br/><br/>
 
-```{r}
-
+```{r second-plot}
+ggplot(data = longley, mapping = aes(x = Year, y = Armed.Forces)) +
+  geom_point(size = 3, shape = "square", color = "darkgreen") + geom_line(color = "darkgreen") + theme_minimal() + ggtitle("Number in armed forces from 1947 - 1962")
 ```
 
 *Hints:*
@@ -242,6 +271,8 @@ Use package `ggplot2` to recreate the plots below.
 - theme is `theme_minimal()`
 
 **Why the sudden jump in number of armed forces members from 1950 to 1951?**
+
+Korean War.
 
 <br/>
 
