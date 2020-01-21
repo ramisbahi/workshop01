@@ -55,6 +55,7 @@ The console can be used as a calculator.
 5. `0 / 0`
 6. `0.0000003 * 2`
 
+
 When you launch RStudio, numerous functions are immediately available to you. 
 A few of the mathematical and statistical functions are:
 
@@ -104,7 +105,11 @@ examples given. Examples are always at the end of the help reference.
 18. `ceiling`
 
 ```{r}
-
+sqrt(2)
+round(2.5)
+round(2.51)
+floor(2.5)
+ceiling(2.5)
 ```
 
 Now is good place to save your work. Stage, commit, and push your work to 
